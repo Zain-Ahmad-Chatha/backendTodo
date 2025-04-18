@@ -1,5 +1,6 @@
 
 const express = require('express');
+require('dotenv').config()
 const users = require('./consts')
 
 const PORT = process.env.PORT || 4000;
