@@ -23,5 +23,5 @@ jobs:
     #here --password-stdin is taking the previous echo string into this.
 #NOTE: adding password and username is not a good approach, use github action secrets here, means this values will be saved in my github repo in the secrets and will be replaces when this will be run.
 #like secrets.DOCKERHUB_PASSWORD, we can write in the bactic as we write js in bactic.
-    - run: echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u ${{secrets.DOCKERHUB_USERNAME}} --password-stding
+    - run: echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u ${{secrets.DOCKERHUB_USERNAME}} --password-stdin
     - run: docker push zainhassanchatha/todobackend2:latest
