@@ -12,9 +12,16 @@ app.get('/', (req,res)=>{
 })
 
 app.get('/:id', (req,res)=>{
-    console.log('deleting users', req.params);
+    console.log('getting user', req.params);
     
     let users = users.filter(user => user.id === req.params?.id)
+    res.send(users)
+})
+
+app.delete('/:id', (req, res)=>{
+    console.log('deleting the user');
+    let users = users.filter(user => user.id !== req.params?.id)
+    console.log('returning remaining users.')
     res.send(users)
 })
 
