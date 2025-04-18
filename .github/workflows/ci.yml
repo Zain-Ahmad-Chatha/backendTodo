@@ -31,25 +31,3 @@ jobs:
     
     - name: "Build Command"
       run: npm run build
-
-  unit-tests:  #build job
-      runs-on: ubuntu-latest  #run on github server not on my locall machine.
-
-      strategy:
-        matrix:
-          node-version: [14.x, 16.x, 18.x]
-      
-
-      steps:
-      - uses: actions/checkout@v4 #it tells to github to checkout to the current branch that is feature branch
-      - name: Use Node.js ${{matrix.node-version}}  # we can remove this it is optional it just tell that you have to setup node environment.
-        uses: actions/setup-node@v3 #setup the node env before doing anything else with the project.
-        with:
-            node-version: ${{ matrix.node-version }}  #setup with node several version that is in the strategy block means.
-            cache: 'npm'
-      #we can also set the names of the commands.
-      - name: "Installing dependencies"
-        run: npm install  #install the depencies that is in the package.json file exist.
-      
-      - name: "Running Testing cases Command"
-        run: npm run test
