@@ -25,7 +25,7 @@ app.delete('/:id', (req, res)=>{
     res.send(users)
 })
 
-app.update('/', (req,res)=>{
+app.put('/', (req,res)=>{
     console.log('updating the user')
     let users = users.map(user => {
         if(user.id === req.body.user.id){

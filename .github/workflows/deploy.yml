@@ -1,0 +1,27 @@
+name: Deployment
+
+on:
+  push:
+    branches: ['master']  #any thing, that happen with the main branch then run the following job.
+
+# here we can define jobs mean what jobs will be done.
+
+jobs:
+  deploy:  #build job
+    runs-on: ubuntu-latest  #run on github server not on my locall machine.
+
+# no need of strategy.
+
+    steps:
+    - uses: actions/checkout@v4 #it tells to github to checkout to the current branch that is feature branch
+
+    - run: docker build . -t zainhassanchatha/todobackend2 #we have already have a dockerfile in this when i set it to build ., dot means in the current directory it will run the docker file and there is all
+    # settings exist.
+    #as here two systems are communication so we need docker hub access token to push it from github actions.
+    #so if i login it from cmd, i will hit docker login -u zainhassanchatha and it will ask me to enter the password.
+    #but here we r going to automate the syste. 
+    #here --password-stdin is taking the previous echo string into this.
+#NOTE: adding password and username is not a good approach, use github action secrets here, means this values will be saved in my github repo in the secrets and will be replaces when this will be run.
+#like secrets.DOCKERHUB_PASSWORD, we can write in the bactic as we write js in bactic.
+    - run: echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u ${{secrets.DOCKERHUB_USERNAME}} --password-stding
+    - run: docker push zainhassanchatha/todobackend2:latest
