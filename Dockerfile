@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expose the port that your app will run on
-ENV PORT=3000
+# ENV PORT=3000
 EXPOSE 3000
 
 # Run your app when the container starts

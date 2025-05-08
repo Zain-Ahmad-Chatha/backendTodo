@@ -25,3 +25,13 @@ jobs:
 #like secrets.DOCKERHUB_PASSWORD, we can write in the bactic as we write js in bactic.
     - run: echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u ${{secrets.DOCKERHUB_USERNAME}} --password-stdin
     - run: docker push zainhassanchatha/todobackend2:latest
+
+    # to run on local laptop, pull image and run the container again.
+    # - run: docker pull zainhassanchatha/todobackend2
+    # - run: docker run -p 3000:3000 zainhassanchatha/todobackend2
+
+    # to run the container again i think i have to stop and remove the existing container.
+    - run: docker pull zainhassanchatha/todobackend2
+    - run: docker stop todobackend2 || true
+    - run: docker rm todobackend2 || true
+    - run: docker run -d --name todobackend2 -p 3000:3000 -e PORT=3000 zainhassanchatha/todobackend2:latest
